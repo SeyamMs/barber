@@ -1,0 +1,166 @@
+.services {
+  padding: 40px;
+  text-align: center;
+}
+
+.services h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.service-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.service-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  width: 250px;
+  padding: 0px 0px;
+  height: 500px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.service-card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.service-card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.service-card p {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.service-card a {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.service-card a:hover {
+  background-color: #444;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  position: relative;
+  overflow: hidden;
+}
+
+.center-content {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.logo h1 {
+  font-size: 36px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.logo p {
+  font-size: 14px;
+  margin: 0;
+  color: #666;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.header-icons {
+  position: absolute;
+  right: 40px;
+  display: flex;
+  margin-right: -120px;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-icons a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+}
+
+.header-icons img {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.header-icons span {
+  font-weight: 400;
+}
+
+.hero-image {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+}
+
+.footer-content {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.chat-a {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.chat-a:hover {
+  background-color: #444;
+}

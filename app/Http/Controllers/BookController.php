@@ -13,7 +13,7 @@ class BookController extends Controller
      */
     public function index()
     {
-       return view('empty');
+        return view('empty');
     }
 
     /**
@@ -36,9 +36,10 @@ class BookController extends Controller
      * Display the specified resource.
      */
     public function show($id)
-    {   $days = Day::all();
+    {
+        $days = Day::all();
         $services = Service::findOrFail($id);
-        return view('book',compact('services','days'));
+        return view('book', compact('services', 'days'));
     }
 
     /**

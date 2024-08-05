@@ -61,17 +61,18 @@
             padding: 10px;
         }
 
-         .calendar-day {
-           position: relative;
-           display: inline-block;
-           width: 40px;
-           height: 40px;
-           text-align: center;
-           line-height: 40px;
-           margin: 2px;
-           border: 1px solid #ccc;
-           cursor: pointer;
+        .calendar-day {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            margin: 2px;
+            border: 1px solid #ccc;
+            cursor: pointer;
         }
+
         .point {
             position: absolute;
             bottom: 5px;
@@ -141,7 +142,8 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .design-placeholder{
+
+        .design-placeholder {
             grid-column: 2 / 3;
             display: inline;
             flex-direction: column;
@@ -169,7 +171,8 @@
             cursor: pointer;
             margin-top: 10px;
         }
-        .show-all{
+
+        .show-all {
             margin-top: 2px;
             height: 40px;
             display: inline-block;
@@ -193,7 +196,7 @@
             border-bottom: 1px solid #ccc;
             position: relative;
         }
-      
+
         .center-content {
             text-align: center;
             flex-grow: 1;
@@ -313,7 +316,7 @@
                 <!-- Calendar days will be populated here -->
             </div>
         </div>
-   
+
         <div class="timepicker" id="timepicker">
             <!-- Time slots will be populated here -->
         </div>
@@ -323,199 +326,199 @@
             <button class="button">Eerst beschikbare datum</button>
         </div>
         <div class="booking-info">
-                <span id="selected-date-info">Selecteer een datum</span>
-                <span id="selected-time-info"></span>
-                <span id="service-details">Dienstgegevens</span>
-                <span id="service-name">{{$services->name}}</span>
-                <span id="service-duration">{{$services->duration}} min</span>
-                <span id="appointment-details"></span>
-                <span id="service-price">{{$services->price}} {{$services->currency}}</span>
-                <a href="#" class="button disabled" id="next-button">Volgende</a>
-            
-                <!-- Hidden Form -->
-                <form id="bookingForm" action="{{route('formDetails')}}" method="GET">
-                    
-                    <input type="hidden" name="selected_date" id="hidden-date">
-                    <input type="hidden" name="selected_time" id="hidden-time">
-                    <input type="hidden" name="service_name" value="{{$services->name}}">
-                    <input type="hidden" name="service_duration" value="{{$services->duration}}">
-                    <input type="hidden" name="service_price" value="{{$services->price}}">
-                    <input type="hidden" name="service_currency" value="{{$services->currency}}">
-                </form>
+            <span id="selected-date-info">Selecteer een datum</span>
+            <span id="selected-time-info"></span>
+            <span id="service-details">Dienstgegevens</span>
+            <span id="service-name">{{ $services->name }}</span>
+            <span id="service-duration">{{ $services->duration }} min</span>
+            <span id="appointment-details"></span>
+            <span id="service-price">{{ $services->price }} {{ $services->currency }}</span>
+            <a href="#" class="button disabled" id="next-button">Volgende</a>
+
+            <!-- Hidden Form -->
+            <form id="bookingForm" action="{{ route('formDetails') }}" method="GET">
+
+                <input type="hidden" name="selected_date" id="hidden-date">
+                <input type="hidden" name="selected_time" id="hidden-time">
+                <input type="hidden" name="service_name" value="{{ $services->name }}">
+                <input type="hidden" name="service_duration" value="{{ $services->duration }}">
+                <input type="hidden" name="service_price" value="{{ $services->price }}">
+                <input type="hidden" name="service_currency" value="{{ $services->currency }}">
+            </form>
         </div>
         <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
         <script>
-                const calendarDays = document.getElementById('calendarBody');
-                const selectedDateInfo = document.getElementById('selected-date-info');
-                const selectedTimeInfo = document.getElementById('selected-time-info');
-                const timepicker = document.getElementById('timepicker');
-                const appointmentDetails = document.getElementById('appointment-details');
-                const nextButton = document.getElementById('next-button');
-                const currentMonthLabel = document.getElementById('currentMonth');
-                const designPlaceholder = document.getElementById('design_placeholder');
-                const placholderDateInfo = document.getElementById('placeholder-date');
-            
-                const hiddenDate = document.getElementById('hidden-date');
-                const hiddenTime = document.getElementById('hidden-time');
-            
-                let currentDate = new Date(2024, 7, 1); // Start in August 2024
-            
-                // Pass days data to JavaScript
-                const daysData = @json($days);
-            
-                // Extract times and days of the week from the data
-                const times = [...new Set(daysData.map(day => day.time))];
-                const daysOfWeek = [...new Set(daysData.map(day => new Date(day.date).toLocaleDateString('en', {
-                    weekday: 'long'
-                })))];
-            
-                function updateCalendar() {
-                    calendarDays.innerHTML = '';
-                    currentMonthLabel.textContent = currentDate.toLocaleDateString('nl-NL', {
+            const calendarDays = document.getElementById('calendarBody');
+            const selectedDateInfo = document.getElementById('selected-date-info');
+            const selectedTimeInfo = document.getElementById('selected-time-info');
+            const timepicker = document.getElementById('timepicker');
+            const appointmentDetails = document.getElementById('appointment-details');
+            const nextButton = document.getElementById('next-button');
+            const currentMonthLabel = document.getElementById('currentMonth');
+            const designPlaceholder = document.getElementById('design_placeholder');
+            const placholderDateInfo = document.getElementById('placeholder-date');
+
+            const hiddenDate = document.getElementById('hidden-date');
+            const hiddenTime = document.getElementById('hidden-time');
+
+            let currentDate = new Date(2024, 7, 1); // Start in August 2024
+
+            // Pass days data to JavaScript
+            const daysData = @json($days);
+
+            // Extract times and days of the week from the data
+            const times = [...new Set(daysData.map(day => day.time))];
+            const daysOfWeek = [...new Set(daysData.map(day => new Date(day.date).toLocaleDateString('en', {
+                weekday: 'long'
+            })))];
+
+            function updateCalendar() {
+                calendarDays.innerHTML = '';
+                currentMonthLabel.textContent = currentDate.toLocaleDateString('nl-NL', {
+                    month: 'long',
+                    year: 'numeric'
+                });
+
+                const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+                const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+                // Start day of the week (0 for Sunday, 1 for Monday, etc.)
+                const startDay = (firstDayOfMonth.getDay() + 6) % 7; // Adjusting to start week on Monday
+
+                // Populate previous month's trailing days
+                for (let i = 0; i < startDay; i++) {
+                    const emptyDiv = document.createElement('div');
+                    emptyDiv.className = 'calendar-day outside';
+                    calendarDays.appendChild(emptyDiv);
+                }
+
+                // Populate current month's days
+                for (let day = 1; day <= lastDayOfMonth.getDate(); day++) {
+                    const dayDiv = document.createElement('div');
+                    dayDiv.className = 'calendar-day';
+                    dayDiv.textContent = day;
+
+                    // Use local date instead of UTC to avoid off-by-one errors
+                    const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day + 1);
+
+                    // Add class 'point' if the day is not Sunday (0) or Friday (5)
+                    if (date.getDay() !== 0 && date.getDay() !== 5) {
+                        const pointMarker = document.createElement('div');
+                        pointMarker.className = 'point';
+                        dayDiv.appendChild(pointMarker);
+                    }
+
+                    dayDiv.setAttribute('data-date', date.toISOString().split('T')[0]);
+                    dayDiv.addEventListener('click', () => selectDate(dayDiv));
+                    calendarDays.appendChild(dayDiv);
+                }
+            }
+
+            function selectDate(dayDiv) {
+                // Check if the day has a point marker
+                if (dayDiv.querySelector('.point')) {
+                    // If it has point, show timepicker and hide design-placeholder
+                    const date = dayDiv.getAttribute('data-date');
+                    const dateString = new Date(date).toLocaleDateString('nl-NL', {
+                        weekday: 'long',
+                        year: 'numeric',
                         month: 'long',
-                        year: 'numeric'
+                        day: 'numeric'
                     });
-            
-                    const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-                    const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-            
-                    // Start day of the week (0 for Sunday, 1 for Monday, etc.)
-                    const startDay = (firstDayOfMonth.getDay() + 6) % 7; // Adjusting to start week on Monday
-            
-                    // Populate previous month's trailing days
-                    for (let i = 0; i < startDay; i++) {
-                        const emptyDiv = document.createElement('div');
-                        emptyDiv.className = 'calendar-day outside';
-                        calendarDays.appendChild(emptyDiv);
-                    }
-            
-                    // Populate current month's days
-                    for (let day = 1; day <= lastDayOfMonth.getDate(); day++) {
-                        const dayDiv = document.createElement('div');
-                        dayDiv.className = 'calendar-day';
-                        dayDiv.textContent = day;
-            
-                        // Use local date instead of UTC to avoid off-by-one errors
-                        const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day + 1);
-            
-                        // Add class 'point' if the day is not Sunday (0) or Friday (5)
-                        if (date.getDay() !== 0 && date.getDay() !== 5) {
-                            const pointMarker = document.createElement('div');
-                            pointMarker.className = 'point';
-                            dayDiv.appendChild(pointMarker);
-                        }
-            
-                        dayDiv.setAttribute('data-date', date.toISOString().split('T')[0]);
-                        dayDiv.addEventListener('click', () => selectDate(dayDiv));
-                        calendarDays.appendChild(dayDiv);
-                    }
+
+                    selectedDateInfo.textContent = `Datum: ${dateString}`;
+                    selectedTimeInfo.textContent = '';
+                    appointmentDetails.textContent = '';
+                    nextButton.classList.add('disabled');
+                    hiddenDate.value = date; // Set hidden date value
+                    hiddenTime.value = ''; // Clear hidden time value
+                    populateTimeSlots(date);
+
+                    document.querySelector('.calendar-day.selected')?.classList.remove('selected');
+                    dayDiv.classList.add('selected');
+
+                    // Hide design-placeholder and show timepicker
+                    designPlaceholder.style.display = 'none';
+                    timepicker.style.display = 'flex';
+                } else {
+                    const date = dayDiv.getAttribute('data-date');
+                    const dateString = new Date(date).toLocaleDateString('nl-NL', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    placholderDateInfo.textContent = `${dateString}`;
+
+                    document.querySelector('.calendar-day.selected')?.classList.remove('selected');
+                    dayDiv.classList.add('selected');
+                    // If it doesn't have point, show design-placeholder and hide timepicker
+                    designPlaceholder.style.display = 'flex';
+                    timepicker.style.display = 'none';
                 }
-            
-                function selectDate(dayDiv) {
-                    // Check if the day has a point marker
-                    if (dayDiv.querySelector('.point')) {
-                        // If it has point, show timepicker and hide design-placeholder
-                        const date = dayDiv.getAttribute('data-date');
-                        const dateString = new Date(date).toLocaleDateString('nl-NL', {
-                            weekday: 'long',
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                        });
-            
-                        selectedDateInfo.textContent = `Datum: ${dateString}`;
-                        selectedTimeInfo.textContent = '';
-                        appointmentDetails.textContent = '';
-                        nextButton.classList.add('disabled');
-                        hiddenDate.value = date; // Set hidden date value
-                        hiddenTime.value = ''; // Clear hidden time value
-                        populateTimeSlots(date);
-            
-                        document.querySelector('.calendar-day.selected')?.classList.remove('selected');
-                        dayDiv.classList.add('selected');
-            
-                        // Hide design-placeholder and show timepicker
-                        designPlaceholder.style.display = 'none';
-                        timepicker.style.display = 'flex';
-                    } else {
-                        const date = dayDiv.getAttribute('data-date');
-                        const dateString = new Date(date).toLocaleDateString('nl-NL', {
-                            weekday: 'long',
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                        });
-                        placholderDateInfo.textContent = `${dateString}`;
-            
-                        document.querySelector('.calendar-day.selected')?.classList.remove('selected');
-                        dayDiv.classList.add('selected');
-                        // If it doesn't have point, show design-placeholder and hide timepicker
-                        designPlaceholder.style.display = 'flex';
-                        timepicker.style.display = 'none';
-                    }
-                }
-            
-                function populateTimeSlots(date) {
+            }
+
+            function populateTimeSlots(date) {
+                timepicker.innerHTML = '';
+
+                const maxVisibleSlots = 10; // Number of slots to show initially
+                let isExpanded = false; // Track if all slots are shown
+
+                // Function to render time slots based on visibility
+                function renderTimeSlots() {
                     timepicker.innerHTML = '';
-            
-                    const maxVisibleSlots = 10; // Number of slots to show initially
-                    let isExpanded = false; // Track if all slots are shown
-            
-                    // Function to render time slots based on visibility
-                    function renderTimeSlots() {
-                        timepicker.innerHTML = '';
-            
-                        const slotsToShow = isExpanded ? times.length : maxVisibleSlots;
-            
-                        times.slice(0, slotsToShow).forEach(time => {
-                            const slotDiv = document.createElement('div');
-                            slotDiv.textContent = time;
-                            slotDiv.addEventListener('click', () => {
-                                document.querySelectorAll('.timepicker div.selected').forEach(el => el.classList.remove('selected'));
-                                slotDiv.classList.add('selected');
-                                selectedTimeInfo.textContent = `Tijd: ${slotDiv.textContent}`;
-                                appointmentDetails.textContent = `Afspraak op ${new Date(date).toLocaleDateString('nl-NL')} om ${slotDiv.textContent}`;
-                                nextButton.classList.remove('disabled');
-                                hiddenTime.value = slotDiv.textContent; // Set hidden time value
-                            });
-                            timepicker.appendChild(slotDiv);
+
+                    const slotsToShow = isExpanded ? times.length : maxVisibleSlots;
+
+                    times.slice(0, slotsToShow).forEach(time => {
+                        const slotDiv = document.createElement('div');
+                        slotDiv.textContent = time;
+                        slotDiv.addEventListener('click', () => {
+                            document.querySelectorAll('.timepicker div.selected').forEach(el => el.classList.remove('selected'));
+                            slotDiv.classList.add('selected');
+                            selectedTimeInfo.textContent = `Tijd: ${slotDiv.textContent}`;
+                            appointmentDetails.textContent = `Afspraak op ${new Date(date).toLocaleDateString('nl-NL')} om ${slotDiv.textContent}`;
+                            nextButton.classList.remove('disabled');
+                            hiddenTime.value = slotDiv.textContent; // Set hidden time value
                         });
-            
-                        if (times.length > maxVisibleSlots) {
-                            const showAllButton = document.createElement('button');
-                            showAllButton.classList.add('show-all');
-                            showAllButton.textContent = isExpanded ? 'Show Less' : 'Show All';
-                            showAllButton.addEventListener('click', () => {
-                                isExpanded = !isExpanded;
-                                renderTimeSlots();
-                            });
-                            timepicker.appendChild(showAllButton);
-                        }
+                        timepicker.appendChild(slotDiv);
+                    });
+
+                    if (times.length > maxVisibleSlots) {
+                        const showAllButton = document.createElement('button');
+                        showAllButton.classList.add('show-all');
+                        showAllButton.textContent = isExpanded ? 'Show Less' : 'Show All';
+                        showAllButton.addEventListener('click', () => {
+                            isExpanded = !isExpanded;
+                            renderTimeSlots();
+                        });
+                        timepicker.appendChild(showAllButton);
                     }
-            
-                    renderTimeSlots();
                 }
-            
-                document.getElementById('prevMonth').addEventListener('click', () => {
-                    currentDate.setMonth(currentDate.getMonth() - 1);
-                    updateCalendar();
-                });
-            
-                document.getElementById('nextMonth').addEventListener('click', () => {
-                    currentDate.setMonth(currentDate.getMonth() + 1);
-                    updateCalendar();
-                });
-            
-                nextButton.addEventListener('click', (e) => {
-                    if (!nextButton.classList.contains('disabled')) {
-                        document.getElementById('bookingForm').submit();
-                    } else {
-                        e.preventDefault();
-                    }
-                });
-            
+
+                renderTimeSlots();
+            }
+
+            document.getElementById('prevMonth').addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() - 1);
                 updateCalendar();
-            </script>
+            });
+
+            document.getElementById('nextMonth').addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                updateCalendar();
+            });
+
+            nextButton.addEventListener('click', (e) => {
+                if (!nextButton.classList.contains('disabled')) {
+                    document.getElementById('bookingForm').submit();
+                } else {
+                    e.preventDefault();
+                }
+            });
+
+            updateCalendar();
+        </script>
 </body>
 
 </html>
